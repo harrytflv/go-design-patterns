@@ -1,3 +1,3 @@
 # go-design-patterns
 
-Implementations of go design patterns in https://github.com/priximmo/books-1/blob/master/golang/go-design-patterns.pdf
+Implementations of go design patterns in *Design Patterns: Elements of Reusable Object-Oriented Software*. Some of them are stripped from *Go Design Patterns*
