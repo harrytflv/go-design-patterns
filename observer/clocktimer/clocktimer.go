@@ -11,7 +11,10 @@ type ClockTimerObserver interface {
 type ClockTimer interface {
 	Attach(o ClockTimerObserver) error
 	Detach(o ClockTimerObserver) error
-	Notify(ctx context.Context) error
+	// Whether Notify() is exposed envolves a discussion of "Who triggers the
+	// update?" I choose calling notify internally instead of having clients
+	// to do so for this particular case.
+	// Notify(ctx context.Context) error
 
 	GetSecond(ctx context.Context) (int, error)
 
@@ -34,23 +37,23 @@ func (t *clockTimerImpl) Detach(o ClockTimerObserver) error {
 	return nil
 }
 
-func (t *clockTimerImpl) Notify(ctx context.Context) error {
-	for o := range t.observers {
-		if err := o.Update(ctx, t); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func (t *clockTimerImpl) GetSecond(ctx context.Context) (int, error) {
 	return t.second, nil
 }
 
 func (t *clockTimerImpl) Tick(ctx context.Context) error {
 	t.second += 1
-	if err := t.Notify(ctx); err != nil {
+	if err := t.notify(ctx); err != nil {
 		return err
+	}
+	return nil
+}
+
+func (t *clockTimerImpl) notify(ctx context.Context) error {
+	for o := range t.observers {
+		if err := o.Update(ctx, t); err != nil {
+			return err
+		}
 	}
 	return nil
 }
