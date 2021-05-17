@@ -9,8 +9,6 @@ import (
 )
 
 type AnalogClock interface {
-	clocktimer.ClockTimerObserver
-
 	Draw(ctx context.Context) error
 
 	Stop() error
@@ -35,7 +33,7 @@ func (c *analogClockImpl) Draw(ctx context.Context) error {
 		return err
 	}
 
-	log.Println(strings.Repeat("l", seconds))
+	log.Println(strings.Repeat("|", seconds))
 
 	return nil
 }

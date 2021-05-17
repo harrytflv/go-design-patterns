@@ -8,8 +8,6 @@ import (
 )
 
 type DigitalClock interface {
-	clocktimer.ClockTimerObserver
-
 	Draw(ctx context.Context) error
 
 	Stop() error

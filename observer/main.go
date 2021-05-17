@@ -12,8 +12,14 @@ import (
 
 func main() {
 	timer := clocktimer.NewClockTimer()
-	analogClock, _ := analogclock.NewAnalogClock(timer)
-	digitalClock, _ := digitalclock.NewDigitalClock(timer)
+	analogClock, err := analogclock.NewAnalogClock(timer)
+	if err != nil {
+		panic(err)
+	}
+	digitalClock, err := digitalclock.NewDigitalClock(timer)
+	if err != nil {
+		panic(err)
+	}
 
 	for i := 0; i < 10; i++ {
 		log.Println("Timer Ticked.")
