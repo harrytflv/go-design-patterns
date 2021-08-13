@@ -55,6 +55,7 @@ func (t *tcpConnectionImpl) Synchronize() types.TcpConnection {
 }
 
 func (t *tcpConnectionImpl) ProcessOctet(o *types.TcpOctetStream) types.TcpConnection {
-	t.state.Transmit(o)
-	return t
+	return &tcpConnectionImpl{
+		state: t.state.Transmit(o),
+	}
 }

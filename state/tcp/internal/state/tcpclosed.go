@@ -13,8 +13,9 @@ func NewTcpClosed() TcpState {
 	return &tcpClosed{}
 }
 
-func (s *tcpClosed) Transmit(o *types.TcpOctetStream) {
+func (s *tcpClosed) Transmit(o *types.TcpOctetStream) TcpState {
 	log.Println("Warning: transmitting using a closed connection.")
+	return s
 }
 
 func (s *tcpClosed) ActiveOpen() TcpState {
@@ -26,21 +27,19 @@ func (s *tcpClosed) PassiveOpen() TcpState {
 }
 
 func (s *tcpClosed) Close() TcpState {
-	return nil
-
+	return s
 }
 
 func (s *tcpClosed) Send() TcpState {
-	return nil
+	return s
 
 }
 
 func (s *tcpClosed) Acknowledge() TcpState {
-	return nil
+	return s
 
 }
 
 func (s *tcpClosed) Synchronize() TcpState {
-	return nil
-
+	return s
 }

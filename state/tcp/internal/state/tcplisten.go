@@ -13,22 +13,20 @@ func NewTcpListen() TcpState {
 	return &tcpListen{}
 }
 
-func (s *tcpListen) Transmit(o *types.TcpOctetStream) {
-
+func (s *tcpListen) Transmit(o *types.TcpOctetStream) TcpState {
+	return s
 }
 
 func (s *tcpListen) ActiveOpen() TcpState {
-	return nil
+	return s
 }
 
 func (s *tcpListen) PassiveOpen() TcpState {
-	return nil
-
+	return s
 }
 
 func (s *tcpListen) Close() TcpState {
-	return nil
-
+	return s
 }
 
 func (s *tcpListen) Send() TcpState {
@@ -36,11 +34,9 @@ func (s *tcpListen) Send() TcpState {
 }
 
 func (s *tcpListen) Acknowledge() TcpState {
-	return nil
-
+	return s
 }
 
 func (s *tcpListen) Synchronize() TcpState {
-	return nil
-
+	return s
 }
